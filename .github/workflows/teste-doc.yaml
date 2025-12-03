@@ -1,0 +1,19 @@
+name: Verificação de Documentação
+
+on: [pull_request]
+
+jobs:
+  verificar-conteudo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Verificar palavra 'super'
+        run: |
+          if grep -q "super" README.md; then
+            echo "✅ Sucesso: A palavra 'super' foi encontrada!"
+          else
+            echo "❌ Erro: A palavra 'super' não está no README.md"
+            exit 1
+          fi
